@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <com.example.xyzreader.ui.DrawInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draw_insets_frame_layout"
@@ -11,12 +12,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/photo_container"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="450dp"
                 android:background="@color/photo_placeholder">
                 <!--suppress AndroidLintContentDescription -->
                 <ImageView
@@ -35,9 +36,10 @@
             <com.example.xyzreader.ui.MaxWidthLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="#fff"
                 android:layout_below="@id/photo_container"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:background="#fff"
                 android:elevation="@dimen/max_width_elevation"
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:orientation="vertical">
@@ -72,7 +74,8 @@
                         style="?android:attr/textAppearanceSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#8fff" />
+                        android:textColor="#8fff"
+                        android:textSize="@dimen/detail_byline_text_size" />
                 </LinearLayout>
 
                 <TextView
@@ -96,8 +99,8 @@
         android:id="@+id/share_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/fab_margin"
         android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:background="@drawable/add_fab_background"
         android:contentDescription="@string/action_share"
