@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -63,6 +65,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setNestedScrollingEnabled(true);
         getLoaderManager().initLoader(0, null, this);
+        toolBarSetup();
 
         if (savedInstanceState == null) {
             refresh();
@@ -108,6 +111,31 @@ public class ArticleListActivity extends AppCompatActivity implements
             @Override
             public void onRefresh() {
                 refresh();
+            }
+        });
+    }
+
+    private void toolBarSetup(){
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_layout);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.toolbar_container);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener()
+
+        {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged (AppBarLayout appBarLayout,int verticalOffset){
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbarLayout.setTitle(" ");
+                    isShow = false;
+                }
             }
         });
     }
